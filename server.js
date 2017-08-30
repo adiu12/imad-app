@@ -3,7 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool=require('pg').Pool;
 var crypto= require('crypto');
-var bodyparser=requir('body-parser');
+var bodyparser=require('body-parser');
 var config={
     user:'aditmcet',
     database:'aditmcet',
