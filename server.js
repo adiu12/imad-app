@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool=require('pg').Pool;
-var crypto= require(crypto);
+var crypto= require('crypto');
 var config={
     user:'aditmcet',
     database:'aditmcet',
@@ -25,7 +25,7 @@ function hash(input,salt){
 }
 
 app.get('/hash/:input',function(req,res){
-    var hashedstring= hash(req.params.input,'this is a string');
+    var hashedstring= hash(req.params.input,'this-is-a-string');
     res.send(hashedstring);
 });
 
