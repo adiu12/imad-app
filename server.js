@@ -18,6 +18,18 @@ app.use(morgan('combined'));
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
+
+function hash(input,salt){
+  var hashed=  pbkdf2Sync(input,salt,10000,512,'sha512');
+  return hashed.toString('hex');
+}
+
+app.get('/hash/:input',function(req,res){
+    var hashedstring= hash(req.params.input,'this is a string');
+    res.send(hashedstring);
+});
+
+
 var pool=new Pool(config);
 
     app.get('/test-db',function(req,res){
@@ -30,15 +42,7 @@ var pool=new Pool(config);
         }
 });
 });
-function hash(input,salt){
-  var hashed=  pbkdf2Sync(input,salt,10000,512,'sha512');
-  return hashed.toString('hex');
-}
 
-app.get('/hash/:input',function(req,res){
-    var hashedstring= hash(req.params.input,'this is a string');
-    res.send(hashedstring);
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
